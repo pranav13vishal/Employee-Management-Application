@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User Management App</title>
+    <!-- Include Bootstrap CSS for styling -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .header {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+        .page-title {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .table-container {
+            margin: 0 auto;
+            width: 80%; /* To create 20% space on the left and right */
+        }
+        .table-striped tbody tr:nth-of-type(odd) {
+         background-color: #f2f2f2;
+        }
+    </style>
+    <link rel="icon" type="image/png" th:href="@{/images/favicon.png}"/>
+</head>
+
+<body>
+<!-- Header -->
+<div class="header">
+    <h1>User Management App</h1>
+</div>
+
+<!-- Page Title -->
+<div class="page-title">
+    <h2>Users List</h2>
+</div>
+
+<div class="container table-container">
+    <a class="btn btn-primary mb-3" th:href="@{/user-form}">Add User</a>
+    <table class="table table-bordered table-striped table-hover">
+        <thead class="table-dark">
+        <tr>
+        <tr>
+            <th>User First Name</th>
+            <th>User Last Name</th>
+            <th>User Email Id</th>
+            <th>Actions</th>
+        </tr>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="upUser : ${upUsers}">
+            <td th:text="${upUser.firstName}"></td>
+            <td th:text="${upUser.lastName}"></td>
+            <td th:text="${upUser.email}"></td>
+            <td>
+                <a th:href="@{/user-edit/{id}(id=${upUser.id})}" class="btn btn-warning btn-sm">Update</a>
+                <a th:href="@{/delete/{id}(id=${upUser.id})}" class="btn btn-danger btn-sm">Delete</a>
+                <a th:href="@{/user/{id}(id=${upUser.id})}" class="btn btn-info btn-sm">View</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+</body>
+</html>
